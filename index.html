@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistem Informasi Disabilitas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <style>
+      :root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --accent-color: #4895ef;
+        --navbar-height: 70px;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        padding-top: var(--navbar-height);
+      }
+
+      .navbar {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        padding: 1rem 0;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1030;
+        height: var(--navbar-height);
+        transition: all 0.3s ease;
+      }
+
+      .navbar.scrolled {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .hero-section {
+        background: linear-gradient(rgba(67, 97, 238, 0.9), rgba(63, 55, 201, 0.9)), url("/api/placeholder/1920/1080");
+        color: white;
+        padding: 5rem 0;
+        margin-bottom: 3rem;
+        border-radius: 0 0 2rem 2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .search-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+      }
+
+      .search-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .search-input {
+        border-radius: 0.5rem;
+        padding: 0.8rem 1.2rem;
+        border: 2px solid #e9ecef;
+      }
+
+      .search-button {
+        border-radius: 0.5rem;
+        padding: 0.8rem 1.5rem;
+        background: var(--primary-color);
+        border: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .search-button:hover {
+        background: var(--secondary-color);
+        transform: translateY(-2px);
+      }
+
+      .category-card {
+        border: none;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        margin-bottom: 2rem;
+      }
+
+      .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .category-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 1rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      .disability-card {
+        background: white;
+        border-radius: 0.8rem;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .disability-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-color: var(--accent-color);
+      }
+
+      .disability-card h6 {
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .search-result {
+        animation: fadeIn 0.5s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+        color: var(--primary-color);
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 1rem;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 3px;
+        background: var(--accent-color);
+        border-radius: 2px;
+      }
+
+      .icon-feature {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        margin-right: 0.5rem;
+      }
+
+      .nav-link {
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        transform: translateY(-2px);
+      }
+
+      .nav-link i {
+        margin-right: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-universal-access mr-2"></i> DisabilitasInfo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#home"><i class="fas fa-home"></i> Beranda</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#search"><i class="fas fa-search"></i> Pencarian</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#categories"><i class="fas fa-th-large"></i> Kategori</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="report.html"><i class="fas fa-chart-line"></i>Report Perbandingan</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section" id="home">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <h1 class="hero-title">Sistem Informasi Tipe Disabilitas</h1>
+            <p class="lead mb-4">Temukan informasi lengkap tentang berbagai tipe disabilitas dan karakteristiknya untuk pemahaman yang lebih baik.</p>
+            <a href="#search" class="btn btn-light btn-lg"><i class="fas fa-search"></i> Mulai Pencarian</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Section -->
+    <div class="container my-5" id="search">
+      <h2 class="section-title">Pencarian Disabilitas</h2>
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="card search-card">
+            <div class="card-body p-4">
+              <div class="input-group">
+                <input type="text" id="searchInput" class="form-control search-input" placeholder="Masukkan nama disabilitas..." />
+                <button class="btn btn-primary search-button" onclick="searchDisability()"><i class="fas fa-search"></i> Cari</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="searchResults" class="row mt-4"></div>
+    </div>
+
+    <!-- Categories Section -->
+    <div class="container my-5" id="categories">
+      <h2 class="section-title">Kategori Disabilitas</h2>
+      <div class="row" id="categoryList"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      let disabilities = [];
+      fetch("disabilities.json")
+        .then((response) => response.json())
+        .then((data) => {
+          disabilities = data.disabilities;
+          displayCategories();
+        })
+        .catch((error) => console.error("Error loading disabilities:", error));
+    </script>
+    <script src="disabilities.js"></script>
+  </body>
+</html>
